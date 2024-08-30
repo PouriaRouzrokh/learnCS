@@ -1,0 +1,63 @@
+<!--
+  - `Helvetica, sans-serif` means that the browser will first look for the Helvetica font and if it is not available, it will use the default sans-serif font.
+  - The serif and sans-serif are the generic font families. The browser will use the default font for the serif and sans-serif if the specified font is not available.
+  - Helvetica is a sans-serif font and "Times New Roman" is a serif font. Note that we need to use "" when the font name has more than one word.
+  - You can use fonts.google.com to add custom fonts to your code as shown below.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Font Family</title>
+  <style>
+    #helvetica {
+      font-family: Helvetica, sans-serif;
+    }
+
+    #arial {
+      font-family: Arial, sans-serif;
+    }
+
+    #serif {
+      font-family: serif;
+    }
+
+    #sans-serif {
+      font-family: sans-serif;
+    }
+
+    #cursive {
+      font-family: cursive;
+    }
+
+    #monospace {
+      font-family: monospace;
+    }
+
+    #fantasy {
+      font-family: fantasy;
+    }
+  </style>
+
+  <!-- Add the Google font Rubik -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <h1 style="font-family: Rubik, sans-serif; font-size: 50px">Font Family: Rubik</h1>
+  <p id="helvetica">Helvetica</p>
+  <p id="arial">Arial</p>
+  <p id="serif">Serif</p>
+  <p id="sans-serif">Sans Serif</p>
+  <p id="cursive">Cursive</p>
+  <p id="monospace">Monospace</p>
+  <p id="fantasy">Fantasy</p>
+
+</body>
+
+</html>

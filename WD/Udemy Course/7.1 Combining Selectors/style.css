@@ -1,0 +1,25 @@
+/* Write your code here: */
+
+/* Group two selectors together (could be classes, IDs, elements, etc.) */
+h1, h2 {
+    color: purple;
+}
+
+/* Using child selector combinations. The child should be only one level below the parent. */
+.box > p {
+    color: firebrick;
+}
+
+/* Using the descendent selector combinations. The children can be any level below the parent. */
+.box li {
+    color: blue;
+}
+
+/* Using the chain selector combinations. The element must have all the selectors listed. Selectors come without space between them. */
+li.done {
+    color: green;
+}
+/* Combining the different selector combinations */
+ul > p.done {
+    font-size: 0.5rem;
+}
