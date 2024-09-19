@@ -114,6 +114,23 @@ Example:
 <a href="https://www.example.com" target="_blank">Visit Example Site</a>
 ```
 
+## Div Elements
+
+- Group related content using div elements
+  ```html
+  <div class="card">
+    <div class="card-header">
+      <h2>Card Title</h2>
+    </div>
+    <div class="card-body">
+      <p>Card content goes here.</p>
+    </div>
+    <div class="card-footer">
+      <button>Learn More</button>
+    </div>
+  </div>
+  ```
+
 ## Image Elements
 
 - Used to add images to websites
