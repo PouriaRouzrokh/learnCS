@@ -148,6 +148,58 @@ Example:
 <img src="https://picsum.photos/200/200" alt="Random image from Lorem Picsum" />
 ```
 
+## HTML Table Tag
+
+The `<table>` element in HTML was originally designed to display tabular data, but it was also widely used for creating web page layouts in the early days of web development.
+
+### Table Structure
+- `<table>`: The main container for the table
+- `<tr>`: Table row
+- `<td>`: Table data (cell)
+
+### Historical Use for Layout
+- Tables were used to create multi-column layouts
+- Developers would set widths for columns and use nested tables for complex structures
+- Example of a basic 3-column layout:
+  ```html
+  <table>
+    <tr>
+      <td width="25%">Left Column</td>
+      <td width="50%">Middle Column</td>
+      <td width="25%">Right Column</td>
+    </tr>
+  </table>
+  ```
+
+### Current Best Practices
+- Use tables only for presenting tabular data, not for layout
+- For layout purposes, use modern CSS techniques like Flexbox or Grid
+- When using tables for data:
+  1. Use `<th>` for table headers
+  2. Use `<caption>` for table titles
+  3. Consider using `<thead>`, `<tbody>`, and `<tfoot>` for better structure
+
+### Accessibility Concerns
+- Screen readers interpret table structures literally
+- Using tables for layout can confuse assistive technologies
+- Proper use of tables for data presentation enhances accessibility
+
+### Styling Tables
+- Use CSS for styling rather than deprecated HTML attributes
+- Example:
+  ```css
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  ```
+
+While tables are still valid HTML elements, their use should be limited to presenting data that is truly tabular in nature. For layout purposes, modern CSS techniques provide more flexible and accessible solutions.
+
 ## File Paths
 
 - Unique locations for files or folders on a computer
