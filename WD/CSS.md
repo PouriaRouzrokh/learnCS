@@ -666,66 +666,44 @@ img {
 
 ### Flexbox
 
-#### Introduction to Flexbox
+Flexbox is a powerful CSS layout module designed to create flexible and responsive layouts easily. It provides a more efficient way to distribute space and align content within a container, even when the size of your items is unknown or dynamic.
 
-Flexbox is a CSS tool for creating complex, flexible layouts. It's more suitable for modern, interactive web designs compared to older layout methods. Flexbox addresses limitations of previous layout techniques like HTML tables, display properties, and float.
+#### Basic Concepts
 
-#### Evolution of Web Layout Techniques
-
-1. HTML Tables: 
-   - Used `<table>`, `<tr>`, and `<td>` elements for layout.
-   - Not semantic and should only be used for actual tabular data.
-
-2. Display Property:
-   - Used `display: inline-block` for multi-column layouts.
-   - Challenging to control alignment and spacing.
-
-3. Absolute Positioning:
-   - Used `position: absolute` for complex layouts.
-   - Inflexible and problematic when content is added or removed.
-
-4. Float:
-   - Originally intended for wrapping text around images.
-   - Overused for general layout purposes.
-   - Led to various hacks like "The Clearfix Hack".
-   - Still useful for its original purpose but not recommended for overall page structure.
-
-#### Basic Flexbox Concepts
-
-- To use Flexbox, wrap child elements in a container and set `display: flex` on the container.
-- Flexbox ignores previous display values (inline, block, etc.) of child elements.
-- The `gap` property can be used to add space between flex items.
-
-```css
-.container {
-  display: flex;
-  gap: 10px; /* or 1rem for responsive design */
-}
-```
-
-- `display: inline-flex` creates a flex container that behaves like an inline element.
-
-#### Flex Direction and Axes
-
-- `flex-direction` property determines the main axis of the flex container.
-- Default is `row` (left to right).
-- Can be set to `column` for top-to-bottom layout.
-- Main axis and cross axis change based on flex-direction:
-  - For `row`: main axis is horizontal, cross axis is vertical.
-  - For `column`: main axis is vertical, cross axis is horizontal.
-
-```css
-.container {
-  flex-direction: row | column;
-}
-```
+- **Flex Container**: The parent element that holds flex items. Created by setting `display: flex` or `display: inline-flex`.
+- **Flex Items**: The direct children of a flex container.
+- **Main Axis**: The primary axis along which flex items are laid out. Defined by `flex-direction` (default is horizontal).
+- **Cross Axis**: The axis perpendicular to the main axis.
 
 #### Flex Container Properties
 
-##### Flex Wrap
+##### display
 
-- Controls whether items wrap to new lines when there's not enough space.
-- Default is `nowrap`.
+Defines a flex container.
+
+```css
+.container {
+  display: flex; /* or inline-flex */
+}
+```
+
+##### flex-direction
+
+Establishes the main axis.
+
+```css
+.container {
+  flex-direction: row | row-reverse | column | column-reverse;
+}
+```
+
+- `row`: Items are placed horizontally (default)
+- `column`: Items are placed vertically
+- `row-reverse` and `column-reverse`: Same as above but in reverse order
+
+##### flex-wrap
+
+Controls whether items should wrap or not if they exceed the container's size.
 
 ```css
 .container {
@@ -733,32 +711,46 @@ Flexbox is a CSS tool for creating complex, flexible layouts. It's more suitable
 }
 ```
 
-##### Justify Content
+- `nowrap`: All items on one line (default)
+- `wrap`: Items wrap onto multiple lines
+- `wrap-reverse`: Items wrap onto multiple lines in reverse
 
-- Aligns items along the main axis.
-- Options include: `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly`.
+##### justify-content  
 
-```css
-.container {
-  justify-content: space-between;
-}
-```
-
-##### Align Items
-
-- Aligns items along the cross axis.
-- Options include: `flex-start`, `flex-end`, `center`, `baseline`, `stretch`.
+Aligns items along the main axis.
 
 ```css
 .container {
-  align-items: center;
+  justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
 }
 ```
 
-##### Align Content
+- `flex-start`: Items at the start of the container
+- `flex-end`: Items at the end of the container
+- `center`: Items at the center
+- `space-between`: Equal space between items
+- `space-around`: Equal space around items
+- `space-evenly`: Equal space between and around items
 
-- Aligns multiple lines of items within the container.
-- Only works when `flex-wrap` is set to `wrap`.
+##### align-items
+
+Aligns items along the cross axis.
+
+```css
+.container {
+  align-items: stretch | flex-start | flex-end | center | baseline;
+}
+```
+
+- `stretch`: Items stretch to fill the container (default)
+- `flex-start`: Items at the start of the cross axis
+- `flex-end`: Items at the end of the cross axis
+- `center`: Items centered on the cross axis
+- `baseline`: Items aligned by their baselines
+
+##### align-content
+
+Aligns multiple lines of content along the cross axis (only applies when there are multiple rows or columns of items).
 
 ```css
 .container {
@@ -766,131 +758,128 @@ Flexbox is a CSS tool for creating complex, flexible layouts. It's more suitable
 }
 ```
 
+##### gap
+
+Defines space between flex items.
+
+```css
+.container {
+  gap: 10px; /* Sets both row-gap and column-gap to 10px */
+  gap: 10px 20px; /* row-gap: 10px and column-gap: 20px */
+}
+```
+
 #### Flex Item Properties
 
-##### Order
+##### order
 
-- Changes the order of specific items.
-- Default order is 0 for all items.
-
-```css
-.item {
-  order: 1; /* or any integer */
-}
-```
-
-##### Align Self
-
-- Overrides the container's `align-items` for individual items.
+Controls the order of flex items.
 
 ```css
 .item {
-  align-self: flex-start | flex-end | center | baseline | stretch;
+  order: 5; /* Default is 0 */
 }
 ```
 
-#### Flexbox Sizing
+##### flex-grow
 
-Flexbox uses a priority list to determine item sizes:
-
-1. Min-width and max-width
-2. Flex-basis
-3. Width (or height for column direction)
-4. Content size
-
-##### Flex Grow and Flex Shrink
-
-- `flex-grow` determines how much an item can grow relative to other items.
-- `flex-shrink` determines how much an item can shrink relative to other items.
+Defines the ability for a flex item to grow if necessary.
 
 ```css
 .item {
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex-grow: 1; /* Default is 0 */
 }
 ```
 
-##### Flex Basis
+##### flex-shrink
 
-- Sets the initial main size of a flex item.
-- Overrides the `width` property in row direction or `height` in column direction.
+Defines the ability for a flex item to shrink if necessary.
 
 ```css
 .item {
-  flex-basis: 200px;
+  flex-shrink: 1; /* Default is 1 */
 }
 ```
 
-##### Flex Shorthand
+##### flex-basis
 
-- Combines `flex-grow`, `flex-shrink`, and `flex-basis`.
-- `flex: 1` is equivalent to `flex: 1 1 0`.
+Defines the default size of an element before the remaining space is distributed.
 
 ```css
 .item {
-  flex: 1; /* grow: 1, shrink: 1, basis: 0 */
+  flex-basis: auto | <width>;
 }
 ```
 
-#### Responsive Design with Flexbox
+##### flex
 
-- Combine Flexbox with media queries for responsive layouts.
+Shorthand for flex-grow, flex-shrink, and flex-basis.
 
 ```css
-@media (max-width: 1250px) {
-  .container {
-    flex-direction: column;
-  }
+.item {
+  flex: none | [ <flex-grow> <flex-shrink>? || <flex-basis> ];
 }
 ```
 
-#### Practical Example: Pricing Table
+Common values:
+- `flex: 1;` equivalent to `flex: 1 1 0%;`
+- `flex: auto;` equivalent to `flex: 1 1 auto;`
+- `flex: none;` equivalent to `flex: 0 0 auto;`
+
+##### align-self 
+
+Allows the default alignment to be overridden for individual flex items.
+
+```css
+.item {
+  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+```
+
+#### Practical Example: Navigation Bar
+
+Here's a simple example of a responsive navigation bar using Flexbox:
 
 ```html
-<div class="pricing-container">
-  <div class="pricing-plan">
-    <div class="plan-title">Basic</div>
-    <div class="plan-price">$11.99/month</div>
-    <ul class="plan-features">
-      <li>✅ 10GB Storage</li>
-      <li>✅ 1 User</li>
-      <li>🚫 Support</li>
-    </ul>
-    <button class="plan-button">Sign Up</button>
-  </div>
-  <!-- Repeat for other plans -->
-</div>
+<nav class="navbar">
+  <div class="logo">MyWebsite</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
 ```
 
 ```css
-.pricing-container {
+.navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  gap: 2rem;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
 }
 
-.pricing-plan {
-  flex: 1;
-  max-width: 400px;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  text-align: center;
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
 }
 
-/* Add styles for plan elements */
-
-@media (max-width: 1250px) {
-  .pricing-container {
+@media (max-width: 600px) {
+  .navbar {
     flex-direction: column;
-    height: 100%;
+  }
+  
+  .nav-links {
+    margin-top: 1rem;
   }
 }
 ```
 
-This example demonstrates how to create a responsive pricing table using Flexbox, including centering content both vertically and horizontally.
+This example creates a horizontal navigation bar that switches to a vertical layout on smaller screens, demonstrating the power and flexibility of Flexbox for responsive design.
 
 ### Grid
 
