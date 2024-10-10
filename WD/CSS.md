@@ -883,6 +883,232 @@ This example creates a horizontal navigation bar that switches to a vertical lay
 
 ### Grid
 
+#### Introduction to CSS Grid
+
+- CSS Grid is a two-dimensional layout system designed for creating complex web layouts
+- It allows precise control over both rows and columns simultaneously
+- Complements Flexbox (one-dimensional layouts) for comprehensive layout control
+
+#### Basic Grid Setup
+
+- To create a grid container:
+  ```css
+  .container {
+    display: grid;
+  }
+  ```
+  This transforms the element into a grid container and its direct children into grid items.
+
+- Defining rows and columns:
+  ```css
+  .container {
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 100px;
+  }
+  ```
+  This creates a 3x2 grid with fixed-size columns and rows.
+
+#### Grid Terminology
+
+- Grid Container: The element with `display: grid`
+- Grid Items: Direct children of the grid container
+- Grid Lines: The dividing lines that make up the structure of the grid
+- Grid Tracks: The space between two adjacent grid lines (rows or columns)
+- Grid Cell: The intersection of a row and a column
+- Grid Area: The total space surrounded by four grid lines
+
+#### Sizing Grid Tracks
+
+1. Fixed sizes:
+   ```css
+   grid-template-columns: 100px 200px 300px;
+   ```
+   This creates three columns with exact pixel widths.
+
+2. Fractional units (fr):
+   ```css
+   grid-template-columns: 1fr 2fr 1fr;
+   ```
+   The `fr` unit distributes available space proportionally. Here, the middle column gets twice the width of the others.
+
+3. Auto keyword:
+   ```css
+   grid-template-columns: auto 200px auto;
+   ```
+   `auto` sizes the column based on its content, while still respecting other constraints.
+
+4. Minmax function:
+   ```css
+   grid-template-columns: minmax(100px, 300px) 200px;
+   ```
+   `minmax(min, max)` sets a size range for the track. Here, the first column will be between 100px and 300px.
+
+5. Repeat function:
+   ```css
+   grid-template-columns: repeat(3, 1fr);
+   ```
+   `repeat(count, size)` is a shorthand for repeating track sizes. This creates three equal-width columns.
+
+#### Grid Gaps
+
+- Set space between grid items:
+  ```css
+  .container {
+    gap: 10px; /* Sets both row and column gaps */
+    column-gap: 20px; /* Sets only column gaps */
+    row-gap: 15px; /* Sets only row gaps */
+  }
+  ```
+
+#### Positioning Grid Items
+
+1. Grid-column and grid-row properties:
+   ```css
+   .item {
+     grid-column: 1 / 3;
+     grid-row: 2 / 4;
+   }
+   ```
+   `grid-column` and `grid-row` define an item's location and span. The syntax is `start / end`, referring to grid lines.
+
+2. Span keyword:
+   ```css
+   .item {
+     grid-column: span 2;
+   }
+   ```
+   `span` keyword tells the item to span a specific number of tracks. Here, it spans two columns.
+
+3. Grid-area shorthand:
+   ```css
+   .item {
+     grid-area: 1 / 2 / 3 / 4;
+   }
+   ```
+   `grid-area` is shorthand for `row-start / column-start / row-end / column-end`.
+
+#### Aligning Grid Items
+
+- For the container:
+  ```css
+  .container {
+    justify-items: center; /* Aligns items horizontally within their cell */
+    align-items: center; /* Aligns items vertically within their cell */
+  }
+  ```
+
+- For individual items:
+  ```css
+  .item {
+    justify-self: end; /* Aligns this item horizontally within its cell */
+    align-self: start; /* Aligns this item vertically within its cell */
+  }
+  ```
+
+#### Responsive Grids
+
+- Using auto-fit or auto-fill with minmax:
+  ```css
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  ```
+  `auto-fit` creates as many tracks as can fit in the container, each at least 200px wide, expanding to fill available space.
+
+#### Nested Grids
+
+- Grid items can be grid containers themselves:
+  ```css
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  ```
+  This creates a grid within a grid item, allowing for complex layouts.
+
+#### Grid Areas
+
+1. Defining named grid areas:
+   ```css
+   .container {
+     grid-template-areas:
+       "header header"
+       "sidebar content"
+       "footer footer";
+   }
+   ```
+   This creates a named template for the grid layout.
+
+2. Placing items in named areas:
+   ```css
+   .header { grid-area: header; }
+   .sidebar { grid-area: sidebar; }
+   .content { grid-area: content; }
+   .footer { grid-area: footer; }
+   ```
+   Items are placed in their corresponding named areas.
+
+#### Overlapping Grid Items
+
+- Items can occupy the same grid cells:
+  ```css
+  .item1 { grid-area: 1 / 1 / 3 / 3; }
+  .item2 { grid-area: 2 / 2 / 4 / 4; }
+  ```
+  This creates overlapping items, with `item2` partially covering `item1`.
+
+#### Best Practices
+
+- Use Grid for two-dimensional layouts, Flexbox for one-dimensional layouts
+- Utilize Chrome Developer Tools to visualize and debug grid layouts
+- Start with a mobile-first approach and use media queries for responsiveness
+- Name grid lines for better readability:
+  ```css
+  .container {
+    grid-template-columns: [start] 1fr [middle] 2fr [end];
+  }
+  ```
+  This assigns names to grid lines, making it easier to reference them.
+
+#### Example: Mondrian-style Layout
+
+```html
+<div class="container">
+  <div class="item red"></div>
+  <div class="item white1"></div>
+  <div class="item white2"></div>
+  <div class="item white3"></div>
+  <div class="item blue"></div>
+  <div class="item white4"></div>
+  <div class="item"></div>
+  <div class="item yellow"></div>
+  <div class="item black"></div>
+</div>
+```
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 320px 198px 153px 50px;
+  grid-template-rows: 414px 130px 155px 22px;
+  gap: 9px;
+  background-color: #000;
+}
+
+.white1 { grid-column: span 3; } /* Spans 3 columns */
+.white2 { grid-row: span 2; } /* Spans 2 rows */
+.white3 { grid-area: 2 / 2 / 4 / 4; } /* Starts at row 2, column 2, ends at row 4, column 4 */
+.white4 { grid-row: span 2; } /* Spans 2 rows */
+```
+
+This example demonstrates how to create a complex, asymmetrical layout using CSS Grid. It showcases:
+- Precise control over column and row sizes
+- Use of the `span` keyword for multi-cell items
+- The `grid-area` property for precise placement
+- How Grid can recreate artistic designs in web layouts
+
+By leveraging these Grid features, developers can create sophisticated layouts that would be challenging or impossible with other CSS layout methods.
+
 ### Bootstrap
 
 ## CSS Inspection
